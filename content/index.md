@@ -1,5 +1,5 @@
 ---
 title: Welcome to my digital garden in Quartz
 ---
-github pages ?
-See the [documentation](https://quartz.jzhao.xyz) for how to get started.
+
+See the [documentation](https://quartz.jzhao.xyz) for how to make the same digital garden !
