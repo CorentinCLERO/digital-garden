@@ -1,5 +1,5 @@
 ---
-title: Stacks – Concepts, Operations, and Complexity  
+title: Stacks
 tags:
   - Data Structures
   - Stack
