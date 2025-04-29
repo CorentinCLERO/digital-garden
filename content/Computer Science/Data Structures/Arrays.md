@@ -1,5 +1,5 @@
 ---
-title: Arrays - Structure, Types, Operations, and Complexity  
+title: Arrays
 tags:
   - Data Structures
   - Arrays

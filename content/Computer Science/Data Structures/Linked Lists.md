@@ -1,5 +1,5 @@
 ---
-title: Linked Lists – Types, Concepts, and Complexity  
+title: Linked Lists
 tags:
   - Data Structures
   - Linked List
