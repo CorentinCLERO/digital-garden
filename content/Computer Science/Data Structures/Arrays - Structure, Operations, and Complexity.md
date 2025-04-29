@@ -167,3 +167,11 @@ let mixed = [1, "two", false, { key: "value" }];
 [Array Data Structure | Illustrated Data Structures (YouTube)](https://www.youtube.com/watch?v=QJNwK2uJyGs&ab_channel=theroadmap)
 
 ---
+
+**Reference Resources:** 
+
+- [w3schools – DSA Linked Lists](https://www.w3schools.com/dsa/dsa_theory_linkedlists.php)
+
+- [GeeksforGeeks – Linked List Data Structure](https://www.geeksforgeeks.org/data-structures/linked-list/)
+
+---

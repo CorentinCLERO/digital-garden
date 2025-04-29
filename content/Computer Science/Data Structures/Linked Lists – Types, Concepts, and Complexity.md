@@ -135,3 +135,11 @@ class LinkedList {
 [Linked List Data Structure | Illustrated Data Structures (YouTube)](https://www.youtube.com/watch?v=odW9FU8jPRQ)
 
 ---
+
+**Reference Resources:** 
+
+- [MDN Web Docs – Array (JavaScript)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
+
+- [GeeksforGeeks – Arrays Data Structure](https://www.geeksforgeeks.org/array-data-structure/)
+
+---
