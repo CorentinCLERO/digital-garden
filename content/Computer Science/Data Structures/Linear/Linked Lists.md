@@ -3,7 +3,7 @@ title: Linked Lists
 tags:
   - Data Structures
   - Linked List
-  - Algorithms
+  - Linear
   - Computer Science
   - Big O
 ---
@@ -50,7 +50,7 @@ Ideal for applications where you need to cycle through elements repeatedly, such
 ### Circular Doubly Linked List
 
 - Each node has references to both the next and previous nodes.
-- The last node’s next points to the first node, and the first node’s previous points to the last node.
+- The last node's next points to the first node, and the first node's previous points to the last node.
 - Allows endless traversal in either direction, with no true beginning or end.
 
 **Use cases:**  
@@ -138,8 +138,7 @@ class LinkedList {
 
 **Reference Resources:** 
 
-- [MDN Web Docs – Array (JavaScript)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
-
-- [GeeksforGeeks – Arrays Data Structure](https://www.geeksforgeeks.org/array-data-structure/)
+- [w3schools – DSA Linked Lists](https://www.w3schools.com/dsa/dsa_theory_linkedlists.php)
+- [GeeksforGeeks – Linked List Data Structure](https://www.geeksforgeeks.org/data-structures/linked-list/)
 
 ---

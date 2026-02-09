@@ -3,7 +3,7 @@ title: Stacks
 tags:
   - Data Structures
   - Stack
-  - Algorithms
+  - Linear
   - Computer Science
   - Big O
 ---
@@ -113,7 +113,6 @@ class Stack {
 **Reference Resources:** 
 
 - [w3schools – DSA Stacks](https://www.w3schools.com/dsa/dsa_data_stacks.php)  
-
 - [GeeksforGeeks – Stack Data Structure](https://www.geeksforgeeks.org/stack-data-structure/)  
 
 ---

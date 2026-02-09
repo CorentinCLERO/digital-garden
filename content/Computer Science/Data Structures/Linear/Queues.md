@@ -3,7 +3,7 @@ title: Queues
 tags:
   - Data Structures
   - Queue
-  - Algorithms
+  - Linear
   - Computer Science
   - Big O
 ---
@@ -113,7 +113,6 @@ class Queue {
 **Reference Resources:** 
 
 - [w3schools – DSA Queues](https://www.w3schools.com/dsa/dsa_data_queues.php)  
-
 - [GeeksforGeeks – Queue Data Structure](https://www.geeksforgeeks.org/queue-data-structure/)  
 
 ---

@@ -3,7 +3,7 @@ title: Arrays
 tags:
   - Data Structures
   - Arrays
-  - Algorithms
+  - Linear
   - Computer Science
   - Big O
 ---
@@ -34,7 +34,7 @@ An **array** is a fundamental data structure that stores a collection of element
 ### Dynamic Arrays
 
 - **Definition:** Arrays that can grow or shrink as needed.
-- **Languages:** Built-in in higher-level languages (e.g., Python’s `list`, JavaScript’s `Array`, Java’s `ArrayList`).
+- **Languages:** Built-in in higher-level languages (e.g., Python's `list`, JavaScript's `Array`, Java's `ArrayList`).
 - **How it works:** Internally, dynamic arrays use a fixed-size array. When more space is needed, a new, larger array is allocated, and all elements are copied over.
 - **Resizing:** Usually, the array size is doubled when it runs out of space, making resizing efficient on average.
 - **Pros:** Flexible size, easy to use.
@@ -170,8 +170,7 @@ let mixed = [1, "two", false, { key: "value" }];
 
 **Reference Resources:** 
 
-- [w3schools – DSA Linked Lists](https://www.w3schools.com/dsa/dsa_theory_linkedlists.php)
-
-- [GeeksforGeeks – Linked List Data Structure](https://www.geeksforgeeks.org/data-structures/linked-list/)
+- [MDN Web Docs – Array (JavaScript)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
+- [GeeksforGeeks – Arrays Data Structure](https://www.geeksforgeeks.org/array-data-structure/)
 
 ---
