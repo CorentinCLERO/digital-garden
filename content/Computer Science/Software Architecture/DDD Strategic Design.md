@@ -161,27 +161,150 @@ Le Bounded Context est l’**unité de modularisation** de référence pour :
 
 ---
 
-## Relations entre Bounded Contexts
+## Context Mapping Patterns
 
-Les **relations** entre contextes sont tout aussi importantes que les contextes eux‑mêmes.  
-Dans le DDD, on utilise une **context map** pour les décrire (Upstream/Downstream, Anti‑Corruption Layer, etc.).
+Cette section documente les principaux **patterns de relation** entre Bounded Contexts.  
+Elle sert de référence pour les questions sur :
 
-Exemples typiques :
+- **Conformist**
+- **Customer–Supplier**
+- **Anti-Corruption Layer**
+- **Separate Ways**
 
-- **Contexte “Facturation”** consommant des informations du **contexte “Gestion des contrats”**.  
-- **Contexte “Scoring Risque”** nourri par des événements venant du **contexte “Souscription”**.
+### Customer–Supplier
 
-Les relations se font par :
+Dans une relation **Customer–Supplier** :
 
-- **API synchrones** (REST, gRPC, GraphQL, …).
-- **Événements asynchrones** (Kafka, bus de messages).
-- **Fichiers d’échange**, flux batch, etc.
+- Le contexte **Upstream** expose un modèle ou une API dont dépendent d’autres contextes.
+- Le contexte **Downstream** est “client” de ce modèle.
+- Contrairement à **Conformist**, il existe ici une **collaboration** :
+  - Le fournisseur tient compte des besoins du client,
+  - Le client peut négocier des changements,
+  - La roadmap de l’Upstream prend en compte les priorités Downstream.
 
-Un principe clé :
+Implications :
 
-- On **ne partage pas** les mêmes classes métier entre contextes.
-- On définit des **DTO de communication** et/ou des événements dédiés.
-- On accepte de dupliquer certaines informations pour préserver l’**indépendance** des modèles internes.
+- Réunions régulières entre équipes,
+- Contrats de service (SLA, versions d’API),
+- Coordination pour les évolutions de modèle.
+
+Ce pattern est pertinent quand :
+
+- Le fournisseur est central dans le système,
+- Plusieurs clients dépendent de lui,
+- Mais il y a une volonté de **co-conception** plutôt qu’une simple acceptation passive.
+
+### Conformist
+
+Dans une relation **Conformist** :
+
+- L’équipe **Downstream** consomme le modèle de l’Upstream **tel quel**.
+- Elle n’introduit **pas** de couche d’adaptation ni de traduction conceptuelle.
+- Le Downstream “subit” en grande partie les choix du fournisseur.
+
+Conséquences :
+
+- Peu d’effort d’intégration côté client,
+- Fort couplage fonctionnel au modèle de l’Upstream,
+- Difficile de faire évoluer le Downstream si le modèle Upstream ne convient plus.
+
+On utilise ce pattern quand :
+
+- Le pouvoir de négociation du Downstream est faible,
+- Le coût d’introduire un modèle propre n’est pas justifié,
+- Le modèle Upstream est déjà largement accepté dans l’organisation.
+
+---
+
+## Anti-Corruption Layer
+
+Le pattern **Anti-Corruption Layer (ACL)** sert à protéger un Bounded Context :
+
+- face à un **système externe** (souvent legacy),
+- ou face à un **autre contexte** dont le modèle est mal adapté ou trop “sale”.
+
+Principe :
+
+- Le contexte interne définit **son propre modèle propre** et son propre langage ubiquitaire.
+- L’ACL joue le rôle de **traducteur** :
+  - Mapping d’objets externes vers des objets internes,
+  - Conversion de types, de structures, de codes métier.
+- Le code du contexte interne ne voit **jamais** directement les types externes.
+
+Bénéfices :
+
+- Isolation de la dette technique,
+- Possibilité de faire évoluer le modèle interne sans dépendre du legacy,
+- Limitation des fuites conceptuelles (pas de “pollution” du modèle propre).
+
+Coût :
+
+- Implémentation significative (mappers, adaptateurs, façades),
+- Nouvelle couche à maintenir.
+
+On l’emploie quand :
+
+- On intègre un ERP / CRM ancien,
+- Le modèle externe est très éloigné de notre langage métier,
+- Le domaine interne est **Core** ou très important.
+
+---
+
+## Subdomains
+
+Cette section couvre les types de sous-domaines utilisés dans le design stratégique.
+
+### Core Domain
+
+Comme décrit plus haut, le **Core Domain** est la partie :
+
+- La plus critique pour le métier,
+- Qui porte l’**avantage concurrentiel**,
+- Où la qualité du modèle a le plus d’impact.
+
+### Supporting Subdomain
+
+Un **Supporting Subdomain** :
+
+- Est **spécifique** au métier,
+- Est **nécessaire** pour faire fonctionner le système,
+- Mais ne constitue **pas** l’élément de différenciation principal.
+
+Exemple :
+
+- Dans un e‑commerce :
+  - Core Domain : moteur de recommandation, tarification dynamique.
+  - Supporting Subdomain : gestion des factures, gestion des livraisons.
+
+Stratégie :
+
+- Design soigné mais pragmatique,
+- On évite d’y investir autant que dans le Core,
+- Possibilité d’y faire plus de compromis techniques.
+
+### Generic Subdomain
+
+Un **Generic Subdomain** :
+
+- Correspond à une fonctionnalité **générique** et transverse,
+- N’apporte **aucune valeur métier spécifique**,
+- Est souvent disponible sous forme de :
+  - bibliothèques,
+  - frameworks,
+  - services SaaS.
+
+Exemples :
+
+- Authentification,
+- Envoi d’e-mails,
+- Logging et monitoring,
+- Paiement standardisé.
+
+Stratégie :
+
+- Éviter de réinventer la roue,
+- Acheter ou réutiliser autant que possible,
+- Ne pas y investir du design sophistiqué DDD.
 
 ---
 
@@ -238,7 +361,7 @@ Les échanges entre contextes peuvent être matérialisés par :
 
 ## Apports du Design Stratégique
 
-En résumé, le Design Stratégique en DDD permet :
+Le Design Stratégique en DDD permet :
 
 - De **découper le problème** en zones cohérentes alignées sur le métier.
 - De **prioriser** où investir (Core vs Supporting vs Generic).
@@ -249,6 +372,6 @@ En résumé, le Design Stratégique en DDD permet :
   - Une migration progressive vers des microservices,
   - Ou la coexistence de plusieurs applications autour du même domaine.
 
-Le Design Stratégique ne produit pas encore le code, mais il **structure l’espace de solution** et réduit drastiquement la confusion initiale dans les grands systèmes métier.
+Il ne produit pas encore le code, mais il **structure l’espace de solution** et réduit la confusion initiale dans les grands systèmes métier.
 
 ---
